@@ -9,7 +9,6 @@ const randomize = array => {
   return array;
 };
 
-
 $("#submit").on("click", event => {
   event.preventDefault();
   let name = $("#donator").val().trim();
@@ -17,9 +16,9 @@ $("#submit").on("click", event => {
   let newName = `${name} `
   let repeatedName = newName.repeat(entries)
   let trimmedName = repeatedName.trim()
-  let total = trimmedName.split(" ")
-  console.log(total)
-  raffleArray.push(total)
+  let fullEntry = trimmedName.split(" ")
+  console.log(fullEntry)
+  raffleArray.push(fullEntry)
   $("#donator").val("");
   $("#entries").val("");
   const flatArray = raffleArray.flat(1)
@@ -29,10 +28,15 @@ $("#submit").on("click", event => {
     return obj
   }, {});
   $("#odds").text(`Entries: ${JSON.stringify(totalEntries)}`)
-
+  $('#donation-total').text(`Total Entries: ${flatArray.length}`)
 });
 
 $("#randomize").on("click", (event) => {
+  event.preventDefault()
+  randomizeTimer();
+})
+
+$('#pick-winner').on('click', event => {
   event.preventDefault()
   let flatArray = raffleArray.flat(1)
   const random = randomize(flatArray)
@@ -42,12 +46,17 @@ $("#randomize").on("click", (event) => {
   $('#winner').text(`THE WINNER IS... ${winner}`)
 })
 
-//for (let i = 0; i < flatArray.length; i++) {
-// console.log(flatArray[i])
-
-
-$('#pick-winner').on('click', function (event, winner) {
-  event.preventDefault()
-
-
-})
+function randomizeTimer() {
+  $(function () {
+    let current_progress = 0;
+    let interval = setInterval(function () {
+      current_progress += 20;
+      $("#dynamic")
+        .css("width", current_progress + "%")
+        .attr("aria-valuenow", current_progress)
+        .text(current_progress + "% Complete");
+      if (current_progress >= 100)
+        clearInterval(interval);
+    }, 1000);
+  });
+}
