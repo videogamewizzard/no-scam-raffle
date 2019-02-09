@@ -5,3 +5,8 @@ button {
 .jumbotron-fluid {
   padding: 20px;
 }
+
+#odds {
+  display: block;
+  word-wrap: break-word;
+}
