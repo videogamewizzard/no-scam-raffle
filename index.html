@@ -55,7 +55,7 @@
               <label for="exampleInputEmail1">Name</label>
               <input
                 type="name"
-                class="form-control"
+                class="form-control input-text"
                 id="donator"
                 aria-describedby="emailHelp"
                 placeholder="Enter name"
@@ -68,16 +68,16 @@
               <label for="exampleInputPassword1">Number of entries</label>
               <input
                 type="number"
-                class="form-control"
+                class="form-control input-text"
                 id="entries"
                 placeholder="Numbers only please"
               />
             </div>
-            <button id="submit" class="btn btn-primary">Randomize and Submit</button>
+            <button id="submit" class="enable btn btn-primary" disabled="disabled"><i class="fas fa-dice"></i> Submit</button>
           </form>
           <div class="row">
-            <button id="pick-winner" class="ml-3 btn btn-primary mt-2">
-              Randomize and Pick Winner
+            <button id="pick-winner" class="ml-3 btn btn-primary mt-2" disabled="disabled"><i class="fas fa-dice"></i>
+              Pick Winner
             </button>
           </div>
         </div>

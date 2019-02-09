@@ -1,6 +1,16 @@
 const raffleArray = [];
 const flatArray = [];
 
+$(function() {
+  $("#entries, #name").keyup(function() {
+    if ($(this).val() == "") {
+      $(".enable").prop("disabled", true);
+    } else {
+      $(".enable").prop("disabled", false);
+    }
+  });
+});
+
 const randomize = array => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -35,6 +45,7 @@ $("#submit").on("click", event => {
   $("#odds").text(`Entries: ${JSON.stringify(totalEntries)}`);
   $("#donation-total").text(`Total Entries: ${flatArray.length}`);
   randomizeTimer();
+  $("#pick-winner").prop("disabled", false);
 });
 
 $("#pick-winner").on("click", event => {
