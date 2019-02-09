@@ -66,8 +66,14 @@ function randomizeTimer() {
       $("#dynamic")
         .css("width", current_progress + "%")
         .attr("aria-valuenow", current_progress)
-        .text(`Randomizing Entries`);
-      if (current_progress >= 100) clearInterval(interval);
+        .text(`Randomizing Entries`)
+        .addClass("progress-bar-animated");
+      if (current_progress >= 100) {
+        clearInterval(interval);
+        $("#dynamic")
+          .text(`Entries Randomized`)
+          .removeClass("progress-bar-animated");
+      }
     }, 1000);
   });
 }
