@@ -59,23 +59,21 @@ $("#pick-winner").on("click", event => {
 });
 
 function randomizeTimer() {
-  $(function() {
-    let current_progress = 0;
-    let interval = setInterval(function() {
-      current_progress += getRandomInt(20, 50);
+  let current_progress = 0;
+  let interval = setInterval(function() {
+    current_progress += getRandomInt(20, 50);
+    $("#dynamic")
+      .css("width", current_progress + "%")
+      .attr("aria-valuenow", current_progress)
+      .text(`Randomizing Entries`)
+      .addClass("progress-bar-animated");
+    if (current_progress >= 100) {
+      clearInterval(interval);
       $("#dynamic")
-        .css("width", current_progress + "%")
-        .attr("aria-valuenow", current_progress)
-        .text(`Randomizing Entries`)
-        .addClass("progress-bar-animated");
-      if (current_progress >= 100) {
-        clearInterval(interval);
-        $("#dynamic")
-          .text(`Entries Randomized`)
-          .removeClass("progress-bar-animated");
-      }
-    }, 1000);
-  });
+        .text(`Entries Randomized`)
+        .removeClass("progress-bar-animated");
+    }
+  }, 1000);
 }
 
 function getRandomInt(min, max) {
