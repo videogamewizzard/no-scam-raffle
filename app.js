@@ -1,12 +1,16 @@
-$(function() {
-  $("#entries, #name").keyup(function() {
+$(document).ready(function() {
+  validate();
+});
+
+function validate() {
+  $("#entries, #donator").keyup(function() {
     if ($(this).val() == "") {
       $(".enable").prop("disabled", true);
     } else {
       $(".enable").prop("disabled", false);
     }
   });
-});
+}
 
 const raffleArray = [];
 const flatArray = [];
@@ -48,25 +52,38 @@ const doSubmit = () => {
   const entries = $("#entries")
     .val()
     .trim();
-  const newName = `${name},`;
-  const repeatedName = newName.repeat(entries);
-  const slicedName = repeatedName.slice(0, -1);
-  const fullEntry = slicedName.split(",");
-  console.log(fullEntry);
-  raffleArray.push(fullEntry);
-  $("#donator").val("");
-  $("#entries").val("");
-  const flatArray = raffleArray.flat(1);
-  const randomizedArray = randomize(flatArray);
-  const totalEntries = randomizedArray.reduce(function(obj, item) {
-    obj[item] = (obj[item] || 0) + 1;
-    return obj;
-  }, {});
-  const final = JSON.stringify(totalEntries);
-  $("#odds").text(`Entries: ${final}`);
-  $("#donation-total").text(`Total Entries: ${flatArray.length}`);
-  randomizeProgress();
-  $("#pick-winner").prop("disabled", false);
+  if (entries > 0 && entries != "" && name != "") {
+    const newName = `${name},`;
+    const repeatedName = newName.repeat(entries);
+    const slicedName = repeatedName.slice(0, -1);
+    const fullEntry = slicedName.split(",");
+    console.log(fullEntry);
+    raffleArray.push(fullEntry);
+    $("#donator").val("");
+    $("#entries").val("");
+    const flatArray = raffleArray.flat(1);
+    const randomizedArray = randomize(flatArray);
+    const totalEntries = randomizedArray.reduce(function(obj, item) {
+      obj[item] = (obj[item] || 0) + 1;
+      return obj;
+    }, {});
+    const final = JSON.stringify(totalEntries);
+    $("#odds").text(`Entries: ${final}`);
+    $("#donation-total").text(`Total Entries: ${flatArray.length}`);
+    randomizeProgress();
+    $("#pick-winner").prop("disabled", false);
+    $(".alert").alert("close");
+  } else {
+    $("#entries, #donator").val("");
+    let alertDiv = $("<div>");
+    alertDiv
+      .addClass("mt-2 alert alert-danger")
+      .attr("role", "alert")
+      .attr("data-dismiss", "alert")
+      .css("font-size", 14)
+      .text(`Please input a valid value. Click to dismiss.`);
+    $(".form-group").append(alertDiv);
+  }
 };
 
 const pickWinner = () => {
