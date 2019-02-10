@@ -54,6 +54,7 @@ const doSubmit = () => {
     .val()
     .trim();
   if (entries > 0 && entries != "" && name != "") {
+    randomizeProgress();
     const newName = `${name},`;
     const repeatedName = newName.repeat(entries);
     const slicedName = repeatedName.slice(0, -1);
@@ -73,22 +74,14 @@ const doSubmit = () => {
       spanDiv.addClass("percentage").text(`${raffleOdds}, `);
       $("#chance").append(spanDiv);
     });
-
-    const final = JSON.stringify(totalEntries);
-    $("#odds").text(`Entries: ${final}`);
+    let final = JSON.stringify(totalEntries);
+    const slicedFinal = final.slice(1, -1);
+    $("#odds").text(`Entries: ${slicedFinal}`);
     $("#donation-total").text(`Total Entries: ${flatArray.length}`);
-    randomizeProgress();
     $("#pick-winner").prop("disabled", false);
     $(".alert").alert("close");
   } else {
-    $("#entries, #donator").val("");
-    let alertDiv = $("<div>");
-    alertDiv
-      .addClass("mt-2 alert alert-danger")
-      .attr("role", "alert")
-      .attr("data-dismiss", "alert")
-      .text(`Please input a valid value. Click to dismiss.`);
-    $(".form-group").append(alertDiv);
+    handleErrors();
   }
 };
 
@@ -108,3 +101,14 @@ $("#pick-winner").on("click", event => {
   event.preventDefault();
   pickWinner();
 });
+
+const handleErrors = () => {
+  $("#entries, #donator").val("");
+  let alertDiv = $("<div>");
+  alertDiv
+    .addClass("mt-2 alert alert-danger")
+    .attr("role", "alert")
+    .attr("data-dismiss", "alert")
+    .text(`Please input a valid value. Click to dismiss.`);
+  $(".form-group").append(alertDiv);
+};
