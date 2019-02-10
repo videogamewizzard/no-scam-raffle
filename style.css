@@ -31,3 +31,7 @@ body {
 .spacer {
   flex: 1;
 }
+
+.alert {
+  cursor: pointer;
+}
