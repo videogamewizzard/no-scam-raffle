@@ -65,7 +65,7 @@ const handleOdds = () => {
   entryValues.forEach(entry => {
     let raffleOdds = ((entry / flatArray.length) * 100).toFixed(2) + "%";
     let spanDiv = $("<span>");
-    spanDiv.addClass("percentage ml-1 badge badge-dark").text(`${raffleOdds}`);
+    spanDiv.addClass("percentage m-1 badge badge-dark").text(`${raffleOdds}`);
     $("#chance").append(spanDiv);
   });
   return { totalEntries, flatArray };
