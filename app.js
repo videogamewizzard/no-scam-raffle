@@ -122,16 +122,16 @@ const pickWinner = () => {
   const badgeDanger = `<div class="badge badge-danger">`;
   const badgeSuccess = `<div class="badge badge-success">`;
   window.setTimeout(() => {
-    $("#winner").html(`${badgeDanger}5</div>`);
+    $("#winner").html(`${badgeDanger}I mean</div>`);
   }, 1000);
   window.setTimeout(() => {
-    $("#winner").html(`${badgeDanger}4</div>`);
+    $("#winner").html(`${badgeDanger}To be honest</div>`);
   }, 2000);
   window.setTimeout(() => {
-    $("#winner").html(`${badgeDanger}3</div>`);
+    $("#winner").html(`${badgeDanger}Technically</div>`);
   }, 3000);
   window.setTimeout(() => {
-    $("#winner").html(`${badgeDanger}2</div>`);
+    $("#winner").html(`${badgeDanger}Literally</div>`);
   }, 4000);
   window.setTimeout(() => {
     $("#winner").html(`${badgeSuccess}The winner is...</div>`);
