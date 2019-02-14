@@ -19,6 +19,7 @@ button {
 
 .icon-large {
   font-size: 24px;
+  margin-bottom: 1px;
 }
 
 .percentage {
@@ -44,6 +45,7 @@ body {
 @media screen and (max-width: 600px) {
   .alert {
     font-size: 12px;
+    cursor: pointer;
   }
 
   #odds {
