@@ -21,6 +21,10 @@ button {
   font-size: 24px;
 }
 
+.percentage {
+  font-size: 16px;
+}
+
 body {
   margin: 0;
   display: flex;
