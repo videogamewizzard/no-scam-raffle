@@ -110,7 +110,7 @@ const handleErrors = () => {
     .addClass("mt-2 alert alert-danger")
     .attr("role", "alert")
     .attr("data-dismiss", "alert")
-    .text(`Please input a valid value. Click to dismiss.`);
+    .text(`Oops. It's just grease. Click to dismiss.`);
   $(".form-group").append(alertDiv);
 };
 
