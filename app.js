@@ -116,7 +116,15 @@ const handleErrors = () => {
 const className = int => {
   let classes = "badge badge-";
   classes +=
-    int == 0 ? "success" : int == 1 ? "danger" : int == 2 ? "light" : "warning";
+    int == 0
+      ? "success"
+      : int == 1
+      ? "danger"
+      : int == 2
+      ? "light"
+      : int == 3
+      ? "warning"
+      : "dark";
   return classes;
 };
 
@@ -130,33 +138,33 @@ const pickWinner = () => {
     $("#shuffle").html(`<div class="${className(0)}">${tickerRandom}</div>`);
     window.setTimeout(() => {
       clearInterval(interval);
-      $("#shuffle").html(`<div class="${className(0)}">${winner}</div>`);
-    }, 5900);
+      $("#shuffle").html(`<div class="${className(0)}">${winner}!</div>`);
+    }, 6000);
   }, 100);
 
   window.setTimeout(() => {
     $("#winner").html(
-      `<div class="${className(2)}">harnessing wizzard logic</div>`
+      `<div class="${className(4)}">harnessing wizzard logic</div>`
     );
   }, 10);
   window.setTimeout(() => {
     $("#winner").html(`<div class="${className(2)}">I mean</div>`);
   }, 1000);
   window.setTimeout(() => {
-    $("#winner").html(`<div class="${className(3)}">To be honest</div>`);
+    $("#winner").html(`<div class="${className(2)}">To be honest</div>`);
   }, 2000);
   window.setTimeout(() => {
     $("#winner").html(`<div class="${className(2)}">Technically</div>`);
   }, 3000);
   window.setTimeout(() => {
-    $("#winner").html(`<div class="${className(3)}">Literally</div>`);
+    $("#winner").html(`<div class="${className(2)}">Literally</div>`);
   }, 4000);
   window.setTimeout(() => {
     $("#winner").html(`<div class="${className(2)}">The winner is...</div>`);
   }, 5000);
   window.setTimeout(() => {
     $("#winner").html(
-      `<div class="${className(3)}">powered by wizzard logic</div>`
+      `<div class="${className(4)}">powered by wizzard logic</div>`
     );
   }, 6000);
 };
