@@ -113,31 +113,43 @@ const handleErrors = () => {
     .text(`Oops. It's just grease. Click to dismiss.`);
   $(".form-group").append(alertDiv);
 };
+const className = int => {
+  let classes = "badge badge-";
+  classes +=
+    int == 0 ? "success" : int == 1 ? "danger" : int == 2 ? "light" : "warning";
+  return classes;
+};
 
 const pickWinner = () => {
   const flatArray = raffleArray.flat(1);
   const random = randomize(flatArray);
   const winner = random[Math.floor(Math.random() * random.length)];
   randomizeProgress();
-  const badgeDanger = `<div class="badge badge-danger">`;
-  const badgeSuccess = `<div class="badge badge-success">`;
+  let interval = window.setInterval(() => {
+    const tickerRandom = random[Math.floor(Math.random() * random.length)];
+    $("#shuffle").html(`<div class="${className(3)}">${tickerRandom}</div>`);
+    window.setTimeout(() => {
+      clearInterval(interval);
+      $("#shuffle").empty();
+    }, 5900);
+  }, 100);
   window.setTimeout(() => {
-    $("#winner").html(`${badgeDanger}I mean</div>`);
+    $("#winner").html(`<div class="${className(1)}">I mean</div>`);
   }, 1000);
   window.setTimeout(() => {
-    $("#winner").html(`${badgeDanger}To be honest</div>`);
+    $("#winner").html(`<div class="${className(2)}">To be honest</div>`);
   }, 2000);
   window.setTimeout(() => {
-    $("#winner").html(`${badgeDanger}Technically</div>`);
+    $("#winner").html(`<div class="${className(1)}">Technically</div>`);
   }, 3000);
   window.setTimeout(() => {
-    $("#winner").html(`${badgeDanger}Literally</div>`);
+    $("#winner").html(`<div class="${className(2)}">Literally</div>`);
   }, 4000);
   window.setTimeout(() => {
-    $("#winner").html(`${badgeSuccess}The winner is...</div>`);
+    $("#winner").html(`<div class="${className(1)}">The winner is...</div>`);
   }, 5000);
   window.setTimeout(() => {
-    $("#winner").html(`${badgeSuccess}${winner}!</div>`);
+    $("#winner").html(`<div class="${className(0)}">${winner}!</div>`);
   }, 6000);
 };
 
