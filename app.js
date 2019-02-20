@@ -55,7 +55,7 @@ const handleEntry = (name, entries) => {
 };
 
 const handleOdds = () => {
-  const flatArray = raffleArray.flat(1);
+  const flatArray = raffleArray.reduce((a, b) => a.concat(b), []);
   const randomizedArray = randomize(flatArray);
   const totalEntries = randomizedArray.reduce(function(obj, item) {
     obj[item] = (obj[item] || 0) + 1;
@@ -133,7 +133,7 @@ const className = color => {
 };
 
 const pickWinner = () => {
-  const flatArray = raffleArray.flat(1);
+  const flatArray = raffleArray.reduce((a, b) => a.concat(b), []);
   const random = randomize(flatArray);
   const winner = random[getRandomInt(0, random.length - 1)];
   randomizeProgress();
