@@ -135,10 +135,10 @@ const className = color => {
 const pickWinner = () => {
   const flatArray = raffleArray.flat(1);
   const random = randomize(flatArray);
-  const winner = random[Math.floor(Math.random() * random.length)];
+  const winner = random[getRandomInt(0, random.length - 1)];
   randomizeProgress();
   let interval = window.setInterval(() => {
-    const tickerRandom = random[Math.floor(Math.random() * random.length)];
+    const tickerRandom = random[getRandomInt(0, random.length - 1)];
     $("#shuffle").html(
       `<div class="${className("green")}">${tickerRandom}</div>`
     );
