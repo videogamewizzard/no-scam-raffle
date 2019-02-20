@@ -12,8 +12,8 @@ function validate() {
   });
 }
 
-const raffleArray = [];
-const flatArray = [];
+let raffleArray = [];
+let flatArray = [];
 
 const randomize = array => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -185,4 +185,15 @@ $("#submit").on("click", event => {
 $("#pick-winner").on("click", event => {
   event.preventDefault();
   pickWinner();
+});
+
+$("#clear").on("click", event => {
+  event.preventDefault();
+  raffleArray = [];
+  flatArray = [];
+  $("#donation-total, #odds, #chance, #winner, #shuffle").empty();
+  $(".progress-bar")
+    .css("width", "0%")
+    .attr("aria-valuenow", 0)
+    .text("");
 });
