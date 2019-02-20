@@ -127,29 +127,37 @@ const pickWinner = () => {
   randomizeProgress();
   let interval = window.setInterval(() => {
     const tickerRandom = random[Math.floor(Math.random() * random.length)];
-    $("#shuffle").html(`<div class="${className(3)}">${tickerRandom}</div>`);
+    $("#shuffle").html(`<div class="${className(0)}">${tickerRandom}</div>`);
     window.setTimeout(() => {
       clearInterval(interval);
-      $("#shuffle").empty();
+      $("#shuffle").html(`<div class="${className(0)}">${winner}</div>`);
     }, 5900);
   }, 100);
+
   window.setTimeout(() => {
-    $("#winner").html(`<div class="${className(1)}">I mean</div>`);
+    $("#winner").html(
+      `<div class="${className(2)}">harnessing wizzard logic</div>`
+    );
+  }, 10);
+  window.setTimeout(() => {
+    $("#winner").html(`<div class="${className(2)}">I mean</div>`);
   }, 1000);
   window.setTimeout(() => {
-    $("#winner").html(`<div class="${className(2)}">To be honest</div>`);
+    $("#winner").html(`<div class="${className(3)}">To be honest</div>`);
   }, 2000);
   window.setTimeout(() => {
-    $("#winner").html(`<div class="${className(1)}">Technically</div>`);
+    $("#winner").html(`<div class="${className(2)}">Technically</div>`);
   }, 3000);
   window.setTimeout(() => {
-    $("#winner").html(`<div class="${className(2)}">Literally</div>`);
+    $("#winner").html(`<div class="${className(3)}">Literally</div>`);
   }, 4000);
   window.setTimeout(() => {
-    $("#winner").html(`<div class="${className(1)}">The winner is...</div>`);
+    $("#winner").html(`<div class="${className(2)}">The winner is...</div>`);
   }, 5000);
   window.setTimeout(() => {
-    $("#winner").html(`<div class="${className(0)}">${winner}!</div>`);
+    $("#winner").html(
+      `<div class="${className(3)}">powered by wizzard logic</div>`
+    );
   }, 6000);
 };
 
