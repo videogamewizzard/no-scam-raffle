@@ -26,11 +26,11 @@ const randomize = array => {
 const randomizeProgress = () => {
   let currentProgress = 0;
   const interval = setInterval(function() {
-    currentProgress += getRandomInt(25, 50);
+    currentProgress += getRandomInt(20, 50);
     $("#dynamic")
       .css("width", currentProgress + "%")
       .attr("aria-valuenow", currentProgress)
-      .text(`Randomizing Entries`)
+      .text(`I'm working on it`)
       .addClass("progress-bar-animated");
     if (currentProgress >= 100) {
       clearInterval(interval);
@@ -138,13 +138,13 @@ const pickWinner = () => {
     $("#shuffle").html(`<div class="${className(0)}">${tickerRandom}</div>`);
     window.setTimeout(() => {
       clearInterval(interval);
-      $("#shuffle").html(`<div class="${className(0)}">${winner}!</div>`);
+      $("#shuffle").html(`<div class="${className(0)}">${winner}</div>`);
     }, 6000);
   }, 100);
 
   window.setTimeout(() => {
     $("#winner").html(
-      `<div class="${className(4)}">harnessing wizzard logic</div>`
+      `<div class="${className(4)}">harnessing wizzard logic&trade;</div>`
     );
   }, 10);
   window.setTimeout(() => {
@@ -164,9 +164,9 @@ const pickWinner = () => {
   }, 5000);
   window.setTimeout(() => {
     $("#winner").html(
-      `<div class="${className(4)}">powered by wizzard logic</div>`
+      `<div class="${className(4)}">powered by wizzard logic&trade;</div>`
     );
-  }, 6000);
+  }, 6020);
 };
 
 $("#submit").on("click", event => {
