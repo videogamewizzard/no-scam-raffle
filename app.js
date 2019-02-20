@@ -143,30 +143,28 @@ const pickWinner = () => {
   }, 100);
 
   window.setTimeout(() => {
-    $("#winner").html(
-      `<div class="${className(4)}">harnessing wizzard logic&trade;</div>`
-    );
+    $("#winner").html(`<div class="${className(2)}">I'm working on it</div>`);
   }, 10);
   window.setTimeout(() => {
-    $("#winner").html(`<div class="${className(2)}">I mean</div>`);
+    $("#winner").html(
+      `<div class="${className(2)}">harnessing wizzard logic&trade;</div>`
+    );
   }, 1000);
   window.setTimeout(() => {
-    $("#winner").html(`<div class="${className(2)}">To be honest</div>`);
+    $("#winner").html(`<div class="${className(2)}">I mean</div>`);
   }, 2000);
   window.setTimeout(() => {
-    $("#winner").html(`<div class="${className(2)}">Technically</div>`);
+    $("#winner").html(`<div class="${className(2)}">To be honest</div>`);
   }, 3000);
   window.setTimeout(() => {
-    $("#winner").html(`<div class="${className(2)}">Literally</div>`);
+    $("#winner").html(`<div class="${className(2)}">Technically</div>`);
   }, 4000);
   window.setTimeout(() => {
-    $("#winner").html(`<div class="${className(2)}">The winner is...</div>`);
+    $("#winner").html(`<div class="${className(2)}">Literally</div>`);
   }, 5000);
   window.setTimeout(() => {
-    $("#winner").html(
-      `<div class="${className(4)}">powered by wizzard logic&trade;</div>`
-    );
-  }, 6020);
+    $("#winner").html(`<div class="${className(4)}">The winner is...</div>`);
+  }, 5900);
 };
 
 $("#submit").on("click", event => {
