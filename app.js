@@ -76,10 +76,12 @@ const writeToPage = (totalEntries, flatArray) => {
   const slicedFinal = final.slice(1, -1);
   const replacedFinal = slicedFinal.replace(/\"/g, " ");
   const trueFinal = replacedFinal.replace(/ :/g, ": ");
-  $("#odds").html(`<div class="badge badge-light">Entries: ${trueFinal}</div>`);
+  $("#odds").html(
+    `<div class="${className("white")}">Entries: ${trueFinal}</div>`
+  );
 
   $("#donation-total").html(
-    `<div class="badge badge-primary">Total Entries: ${flatArray.length}</div>`
+    `<div class="${className("blue")}">Total Entries: ${flatArray.length}</div>`
   );
   $("#pick-winner").prop("disabled", false);
   $(".alert").alert("close");
@@ -113,17 +115,19 @@ const handleErrors = () => {
     .text(`Oops. It's just grease. Click to dismiss.`);
   $(".form-group").append(alertDiv);
 };
-const className = int => {
+const className = color => {
   let classes = "badge badge-";
   classes +=
-    int == 0
+    color == "green"
       ? "success"
-      : int == 1
+      : color == "red"
       ? "danger"
-      : int == 2
+      : color == "white"
       ? "light"
-      : int == 3
+      : color == "yellow"
       ? "warning"
+      : color == "blue"
+      ? "primary"
       : "dark";
   return classes;
 };
@@ -135,35 +139,41 @@ const pickWinner = () => {
   randomizeProgress();
   let interval = window.setInterval(() => {
     const tickerRandom = random[Math.floor(Math.random() * random.length)];
-    $("#shuffle").html(`<div class="${className(0)}">${tickerRandom}</div>`);
+    $("#shuffle").html(
+      `<div class="${className("green")}">${tickerRandom}</div>`
+    );
     window.setTimeout(() => {
       clearInterval(interval);
-      $("#shuffle").html(`<div class="${className(0)}">${winner}</div>`);
+      $("#shuffle").html(`<div class="${className("green")}">${winner}</div>`);
     }, 6000);
   }, 100);
 
   window.setTimeout(() => {
-    $("#winner").html(`<div class="${className(2)}">I'm working on it</div>`);
+    $("#winner").html(
+      `<div class="${className("white")}">I'm working on it</div>`
+    );
   }, 10);
   window.setTimeout(() => {
     $("#winner").html(
-      `<div class="${className(2)}">harnessing wizzard logic&trade;</div>`
+      `<div class="${className("white")}">harnessing wizzard logic&trade;</div>`
     );
   }, 1000);
   window.setTimeout(() => {
-    $("#winner").html(`<div class="${className(2)}">I mean</div>`);
+    $("#winner").html(`<div class="${className("white")}">I mean</div>`);
   }, 2000);
   window.setTimeout(() => {
-    $("#winner").html(`<div class="${className(2)}">To be honest</div>`);
+    $("#winner").html(`<div class="${className("white")}">To be honest</div>`);
   }, 3000);
   window.setTimeout(() => {
-    $("#winner").html(`<div class="${className(2)}">Technically</div>`);
+    $("#winner").html(`<div class="${className("white")}">Technically</div>`);
   }, 4000);
   window.setTimeout(() => {
-    $("#winner").html(`<div class="${className(2)}">Literally</div>`);
+    $("#winner").html(`<div class="${className("white")}">Literally</div>`);
   }, 5000);
   window.setTimeout(() => {
-    $("#winner").html(`<div class="${className(4)}">The winner is...</div>`);
+    $("#winner").html(
+      `<div class="${className("dark")}">The winner is...</div>`
+    );
   }, 5900);
 };
 
