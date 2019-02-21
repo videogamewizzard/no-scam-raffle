@@ -51,6 +51,10 @@ hr {
   font-size: 14px;
 }
 
+img {
+  width: 100%;
+}
+
 @media screen and (max-width: 600px) {
   .alert {
     font-size: 12px;
