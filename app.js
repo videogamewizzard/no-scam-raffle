@@ -1,6 +1,6 @@
-$(document).ready(function() {
-  validate();
-});
+//$(document).ready(function() {
+//validate();
+//});
 
 function validate() {
   $("#entries, #donator").keyup(function() {
