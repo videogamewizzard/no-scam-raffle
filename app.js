@@ -193,11 +193,13 @@ $("#pick-winner").on("click", event => {
 
 $("#clear").on("click", event => {
   event.preventDefault();
-  raffleArray = [];
-  flatArray = [];
-  $("#donation-total, #odds, #chance, #winner, #shuffle").empty();
-  $(".progress-bar")
-    .css("width", "0%")
-    .attr("aria-valuenow", 0)
-    .text("");
+  window.location.reload();
+  // raffleArray = [];
+  // flatArray = [];
+  // $("#donation-total, #odds, #chance, #winner, #shuffle").empty();
+  // $("#shuffle").empty();
+  // $(".progress-bar")
+  //   .css("width", "0%")
+  //   .attr("aria-valuenow", 0)
+  //   .text("");
 });
