@@ -64,7 +64,7 @@ const handleOdds = () => {
   let entryValues = Object.values(totalEntries);
   entryValues.forEach(entry => {
     const raffleOdds = ((entry / flatArray.length) * 100).toFixed(2);
-    if (raffleOdds > 70) {
+    if (raffleOdds > 50) {
       $("#chance")
         .append(
           `<div class="percentage m-1 ${className(
@@ -72,7 +72,7 @@ const handleOdds = () => {
           )}">${raffleOdds}%</div><hr>`
         )
         .addClass(`border-left border-right border-light`);
-    } else if (raffleOdds < 20) {
+    } else if (raffleOdds < 10) {
       $("#chance")
         .append(
           `<div class="percentage m-1 ${className(
