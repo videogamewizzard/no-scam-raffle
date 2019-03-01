@@ -63,12 +63,32 @@ const handleOdds = () => {
   }, {});
   let entryValues = Object.values(totalEntries);
   entryValues.forEach(entry => {
-    let raffleOdds = ((entry / flatArray.length) * 100).toFixed(2) + "%";
-    $("#chance")
-      .append(
-        `<div class="percentage border-light m-1 badge badge-light">${raffleOdds}</div><hr>`
-      )
-      .addClass(`border-left border-right border-light`);
+    const raffleOdds = ((entry / flatArray.length) * 100).toFixed(2);
+    if (raffleOdds > 70) {
+      $("#chance")
+        .append(
+          `<div class="percentage m-1 ${className(
+            "green"
+          )}">${raffleOdds}%</div><hr>`
+        )
+        .addClass(`border-left border-right border-light`);
+    } else if (raffleOdds < 20) {
+      $("#chance")
+        .append(
+          `<div class="percentage m-1 ${className(
+            "red"
+          )}">${raffleOdds}%</div><hr>`
+        )
+        .addClass(`border-left border-right border-light`);
+    } else {
+      $("#chance")
+        .append(
+          `<div class="percentage m-1 ${className(
+            "white"
+          )}">${raffleOdds}%</div><hr>`
+        )
+        .addClass(`border-left border-right border-light`);
+    }
   });
   return {
     totalEntries,
