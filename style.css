@@ -10,7 +10,8 @@ button {
   font-style: italic;
 }
 
-#odds {
+#odds,
+#chance {
   display: block;
   word-wrap: break-word;
 }

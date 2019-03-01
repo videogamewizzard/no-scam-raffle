@@ -64,9 +64,11 @@ const handleOdds = () => {
   let entryValues = Object.values(totalEntries);
   entryValues.forEach(entry => {
     let raffleOdds = ((entry / flatArray.length) * 100).toFixed(2) + "%";
-    $("#chance").append(
-      `<div class="percentage border-light m-1 badge badge-light">${raffleOdds}</div><hr>`
-    );
+    $("#chance")
+      .append(
+        `<div class="percentage border-light m-1 badge badge-light">${raffleOdds}</div><hr>`
+      )
+      .addClass(`border-left border-right border-light`);
   });
   return {
     totalEntries,
@@ -83,9 +85,9 @@ const writeToPage = (totalEntries, flatArray) => {
   const splitEntryCount = formattedEntryCount.split(",");
   console.log(splitEntryCount);
   splitEntryCount.forEach(count => {
-    $("#odds").append(
-      `<div class="names m-1 ${className("white")}">${count}</div><hr>`
-    );
+    $("#odds")
+      .append(`<div class="names m-1 ${className("white")}">${count}</div><hr>`)
+      .addClass(`border-left border-right border-light`);
   });
 
   $("#total-entries").html(
