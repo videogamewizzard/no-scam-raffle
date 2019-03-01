@@ -3,7 +3,7 @@
 //});
 
 function validate() {
-  $("#entries, #donator").keyup(function() {
+  $("#entries, #donator").keyup(function () {
     if ($(this).val() == "") {
       $(".enable").prop("disabled", true);
     } else {
@@ -25,7 +25,7 @@ const randomize = array => {
 
 const randomizeProgress = () => {
   let currentProgress = 0;
-  const interval = setInterval(function() {
+  const interval = setInterval(function () {
     currentProgress += getRandomInt(20, 50);
     $("#dynamic")
       .css("width", currentProgress + "%")
@@ -57,7 +57,7 @@ const handleEntry = (name, entries) => {
 const handleOdds = () => {
   const flatArray = raffleArray.reduce((a, b) => a.concat(b), []);
   const randomizedArray = randomize(flatArray);
-  const totalEntries = randomizedArray.reduce(function(obj, item) {
+  const totalEntries = randomizedArray.reduce(function (obj, item) {
     obj[item] = (obj[item] || 0) + 1;
     return obj;
   }, {});
@@ -65,8 +65,9 @@ const handleOdds = () => {
   entryValues.forEach(entry => {
     let raffleOdds = ((entry / flatArray.length) * 100).toFixed(2) + "%";
     $("#chance").append(
-      `<div class="percentage m-1 badge badge-light">${raffleOdds}</div><hr>`
+      `<div class="percentage border-light m-1 badge badge-light">${raffleOdds}</div><br>`
     );
+
   });
   return {
     totalEntries,
@@ -98,7 +99,7 @@ const writeToPage = (totalEntries, flatArray) => {
   console.log(splitEntryCount);
   splitEntryCount.forEach(count => {
     $("#odds").append(
-      `<div class="names m-1 ${className("white")}">${count}</div><hr>`
+      `<div class="names m-1 ${className("white")}">${count}</div><br>`
     );
   });
 
@@ -120,7 +121,10 @@ const doSubmit = () => {
   if (entries > 0 && entries != "" && name != "") {
     randomizeProgress();
     handleEntry(name, entries);
-    const { totalEntries, flatArray } = handleOdds();
+    const {
+      totalEntries,
+      flatArray
+    } = handleOdds();
     writeToPage(totalEntries, flatArray);
   } else {
     handleErrors();
@@ -140,17 +144,17 @@ const handleErrors = () => {
 const className = color => {
   let classes = "badge badge-";
   classes +=
-    color == "green"
-      ? "success"
-      : color == "red"
-      ? "danger"
-      : color == "white"
-      ? "light"
-      : color == "yellow"
-      ? "warning"
-      : color == "blue"
-      ? "primary"
-      : "dark";
+    color == "green" ?
+    "success" :
+    color == "red" ?
+    "danger" :
+    color == "white" ?
+    "light" :
+    color == "yellow" ?
+    "warning" :
+    color == "blue" ?
+    "primary" :
+    "dark";
   return classes;
 };
 

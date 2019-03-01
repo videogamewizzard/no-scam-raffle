@@ -60,6 +60,10 @@ p {
   font-size: 48px;
 }
 
+.percentage {
+  border-color: white;
+}
+
 .modal-full {
   min-width: 100%;
   margin: 0;
@@ -73,5 +77,14 @@ p {
   .alert {
     font-size: 12px;
     cursor: pointer;
+  }
+
+  #odds,
+  #chance {
+    font-size: 20px;
+  }
+
+  #winner {
+    font-size: 30px;
   }
 }
