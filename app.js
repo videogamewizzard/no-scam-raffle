@@ -64,23 +64,45 @@ const handleOdds = () => {
   let entryValues = Object.values(totalEntries);
   entryValues.forEach(entry => {
     let raffleOdds = ((entry / flatArray.length) * 100).toFixed(2) + "%";
-    let spanDiv = $("<span>");
-    spanDiv.addClass("percentage m-1 badge badge-light").text(`${raffleOdds}`);
-    $("#chance").append(spanDiv);
+    $("#chance").append(
+      `<div class="percentage m-1 badge badge-light">${raffleOdds}</div><hr>`
+    );
   });
-  return { totalEntries, flatArray };
+  return {
+    totalEntries,
+    flatArray
+  };
 };
 
 const writeToPage = (totalEntries, flatArray) => {
-  let final = JSON.stringify(totalEntries);
-  const slicedFinal = final.slice(1, -1);
-  const replacedFinal = slicedFinal.replace(/\"/g, " ");
-  const trueFinal = replacedFinal.replace(/ :/g, ": ");
-  $("#odds").html(
-    `<div class="${className("white")}">Entries: ${trueFinal}</div>`
-  );
+  // let final = JSON.stringify(totalEntries);
+  // const slicedFinal = final.slice(1, -1);
+  // const replacedFinal = slicedFinal.replace(/\"/g, " ");
+  // const trueFinal = replacedFinal.replace(/ :/g, ": ");
+  // $("#odds").html(
+  //   `<div class="${className("white")}">Entries: ${trueFinal}</div>`
+  // );
 
-  $("#donation-total").html(
+  // $("#donation-total").html(
+  //   `<div class="${className("blue")}">Total Entries: ${flatArray.length}</div>`
+  // );
+  // $("#pick-winner").prop("disabled", false);
+  // $(".alert").alert("close");
+
+  $("#odds").empty();
+  const entryCount = JSON.stringify(totalEntries);
+  const slicedEntryCount = entryCount.slice(1, -1);
+  const replacedEntryCount = slicedEntryCount.replace(/\"/g, " ");
+  const formattedEntryCount = replacedEntryCount.replace(/ :/g, ": ");
+  const splitEntryCount = formattedEntryCount.split(",");
+  console.log(splitEntryCount);
+  splitEntryCount.forEach(count => {
+    $("#odds").append(
+      `<div class="names m-1 ${className("white")}">${count}</div><hr>`
+    );
+  });
+
+  $("#total-entries").html(
     `<div class="${className("blue")}">Total Entries: ${flatArray.length}</div>`
   );
   $("#pick-winner").prop("disabled", false);
@@ -185,11 +207,30 @@ $("#submit").on("click", event => {
 $("#pick-winner").on("click", event => {
   event.preventDefault();
   if (raffleArray.length == 0) {
-    $(".modal").modal();
+    $(".error").modal();
   } else {
     pickWinner();
+    // scam.play();
+    // $(".cancelled").modal();
+    // typeWriter();
   }
 });
+
+const scam = new Audio(`hahaha.mp3`);
+
+let i = 0;
+let str = `RAFFLE IS CANCELLED! `;
+let txt = str.repeat(162);
+let speed = 62;
+
+function typeWriter() {
+  if (i < txt.length) {
+    const modalId = $("#typewriter");
+    modalId.append(txt.charAt(i));
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+}
 
 $("#clear").on("click", event => {
   event.preventDefault();

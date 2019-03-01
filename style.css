@@ -26,10 +26,6 @@ button {
   margin-bottom: 1px;
 }
 
-.percentage {
-  font-size: 16px;
-}
-
 body {
   margin: 0;
   display: flex;
@@ -58,6 +54,19 @@ img {
 p {
   font-weight: bold;
   font-size: 18px;
+}
+
+#typewriter {
+  font-size: 48px;
+}
+
+.modal-full {
+  min-width: 100%;
+  margin: 0;
+}
+
+.modal-full .modal-content {
+  min-height: 100vh;
 }
 
 @media screen and (max-width: 600px) {
