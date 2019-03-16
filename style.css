@@ -10,7 +10,7 @@ button {
   font-style: italic;
 }
 
-#odds,
+#count,
 #chance {
   display: block;
   word-wrap: break-word;
@@ -96,7 +96,7 @@ p {
     font-size: 10px;
   }
 
-  #odds,
+  #count,
   #chance {
     font-size: 20px;
   }
