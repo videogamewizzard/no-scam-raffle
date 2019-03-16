@@ -3,7 +3,7 @@
 //});
 
 function validate() {
-  $("#entries, #donator").keyup(function () {
+  $("#entries, #donator").keyup(function() {
     if ($(this).val() == "") {
       $(".enable").prop("disabled", true);
     } else {
@@ -24,7 +24,7 @@ const randomize = array => {
 
 const randomizeProgress = () => {
   let currentProgress = 0;
-  const interval = setInterval(function () {
+  const interval = setInterval(function() {
     currentProgress += getRandomInt(20, 50);
     $("#dynamic")
       .css("width", currentProgress + "%")
@@ -56,7 +56,7 @@ const handleEntry = (name, entries) => {
 const handleOdds = () => {
   const flatArray = raffleArray.reduce((a, b) => a.concat(b), []);
   const randomizedArray = randomize(flatArray);
-  const entrantTotal = randomizedArray.reduce(function (obj, item) {
+  const entrantTotal = randomizedArray.reduce(function(obj, item) {
     obj[item] = (obj[item] || 0) + 1;
     return obj;
   }, {});
@@ -141,10 +141,7 @@ const doSubmit = () => {
     $("#chance").empty();
     randomizeProgress();
     handleEntry(name, entries);
-    const {
-      entrantTotal,
-      flatArray
-    } = handleOdds();
+    const { entrantTotal, flatArray } = handleOdds();
     handleCount(entrantTotal, flatArray);
   } else {
     handleErrors();
@@ -164,17 +161,17 @@ const handleErrors = () => {
 const className = color => {
   let classes = "badge badge-";
   classes +=
-    color == "green" ?
-    "success" :
-    color == "red" ?
-    "danger" :
-    color == "white" ?
-    "light" :
-    color == "yellow" ?
-    "warning" :
-    color == "blue" ?
-    "primary" :
-    "dark";
+    color == "green"
+      ? "success"
+      : color == "red"
+      ? "danger"
+      : color == "white"
+      ? "light"
+      : color == "yellow"
+      ? "warning"
+      : color == "blue"
+      ? "primary"
+      : "dark";
   return classes;
 };
 
@@ -261,7 +258,7 @@ const resetEntries = () => {
   flatArray = [];
   $("#total-entries, #count, #chance, #winner").empty();
   $("#shuffle").empty();
-  $("#winner").empty()
+  $("#winner").empty();
   $(".progress-bar")
     .css("width", "0%")
     .attr("aria-valuenow", 0)
@@ -289,7 +286,6 @@ $("#reset").on("click", event => {
   localStorage.clear();
 });
 
-
 $(".delete").on("click", event => {
   event.preventDefault();
   const savedRaffle = localStorage.getItem("raffle");
@@ -302,7 +298,6 @@ $(".delete").on("click", event => {
     );
   }
 });
-
 
 $(".save-btn").on("click", event => {
   event.preventDefault();
@@ -329,17 +324,13 @@ $(".save").on("click", event => {
   }
 });
 
-
 $(".load-data").on("click", event => {
   event.preventDefault();
   const savedRaffle = localStorage.getItem("raffle");
   if (raffleArray.length === 0 && savedRaffle) {
     let namesList = JSON.parse(savedRaffle);
     raffleArray.push(namesList);
-    const {
-      entrantTotal,
-      flatArray
-    } = handleOdds();
+    const { entrantTotal, flatArray } = handleOdds();
     handleCount(entrantTotal, flatArray);
     $(".load-msg").html(
       `<p id="no-save"><b>Saved raffle has been loaded.</b></p>`
@@ -359,20 +350,14 @@ $(".load-data").on("click", event => {
 
 $(document).on("click", ".delete-entry", event => {
   $("#count, #chance, #winner", "#shuffle").empty();
-  $("#chance").empty()
-  $("#winner").empty()
-  $("#shuffle").empty()
-  const {
-    id,
-    value
-  } = event.target;
+  $("#chance").empty();
+  $("#winner").empty();
+  $("#shuffle").empty();
+  const { id, value } = event.target;
   const array = raffleArray.reduce((a, b) => a.concat(b), []);
   const filteredArray = array.filter(name => name !== id);
   raffleArray = filteredArray;
-  const {
-    entrantTotal,
-    flatArray
-  } = handleOdds();
+  const { entrantTotal, flatArray } = handleOdds();
   handleCount(entrantTotal, flatArray);
   let spanId = `#${id}`;
   $(spanId).hide();
@@ -383,6 +368,11 @@ $(document).on("click", ".delete-entry", event => {
 });
 
 $(document).on("click", ".refresh", event => {
+  event.preventDefault();
+  window.location.reload();
+});
+
+$(document).on("click", "#clear-page", event => {
   event.preventDefault();
   window.location.reload();
 });
