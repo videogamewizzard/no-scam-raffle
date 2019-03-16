@@ -17,7 +17,7 @@
   </head>
 
   <body class="bg-dark">
-    <div class="jumbotron-fluid bg-dark">
+    <div class="jumbotron-fluid">
       <div id="svg"></div>
       <h1 id="heading" class="text-center title text-light">No Scam Raffle</h1>
       <h6 id="descriptor" class="text-center title text-light mb-2">
@@ -98,18 +98,18 @@
                   </div>
                 </div>
                 <button id="submit" class="enable btn btn-primary">
-                  <i class="fas fa-dice"></i> Submit
+                  <i class="fas fa-plus-square"></i>&nbsp Submit
                 </button>
               </form>
               <div class="row">
                 <button id="pick-winner" class="ml-3 btn btn-success mt-2">
-                  <i class="fas fa-dice"></i>
-                  Pick Winner
+                  <i class="fas fa-dice"></i>&nbsp Pick Winner
                 </button>
-              </div>
-              <div class="row">
-                <button id="clear" class="ml-3 btn btn-outline-danger mt-2">
-                  Clear Entries
+                <button
+                  id="clear-page"
+                  class="ml-auto mr-3 mt-2 btn btn-outline-danger refresh"
+                >
+                  <i class="fas fa-redo"></i>
                 </button>
               </div>
             </div>
@@ -267,11 +267,15 @@
         </div>
       </div>
     </div>
+    <!-- <div class="count-particles">
+      <span class="js-count-particles">--</span> particles
+    </div> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
-    <script src="vivus.min.js"></script>
+    <!-- <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="http://threejs.org/examples/js/libs/stats.min.js"></script> -->
     <script src="app.js"></script>
   </body>
 </html>

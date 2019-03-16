@@ -86,6 +86,15 @@ p {
   min-height: 100vh;
 }
 
+.background-card {
+  background: transparent;
+}
+
+#clear-page {
+  cursor: pointer;
+  font-size: 12px;
+}
+
 @media screen and (max-width: 600px) {
   .alert {
     font-size: 12px;
