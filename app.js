@@ -3,7 +3,7 @@
 //});
 
 function validate() {
-  $("#entries, #donator").keyup(function() {
+  $("#entries, #donator").keyup(function () {
     if ($(this).val() == "") {
       $(".enable").prop("disabled", true);
     } else {
@@ -13,7 +13,6 @@ function validate() {
 }
 
 let raffleArray = [];
-let flatArray = [];
 
 const randomize = array => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -25,7 +24,7 @@ const randomize = array => {
 
 const randomizeProgress = () => {
   let currentProgress = 0;
-  const interval = setInterval(function() {
+  const interval = setInterval(function () {
     currentProgress += getRandomInt(20, 50);
     $("#dynamic")
       .css("width", currentProgress + "%")
@@ -57,11 +56,11 @@ const handleEntry = (name, entries) => {
 const handleOdds = () => {
   const flatArray = raffleArray.reduce((a, b) => a.concat(b), []);
   const randomizedArray = randomize(flatArray);
-  const totalEntries = randomizedArray.reduce(function(obj, item) {
+  const entrantTotal = randomizedArray.reduce(function (obj, item) {
     obj[item] = (obj[item] || 0) + 1;
     return obj;
   }, {});
-  let entryValues = Object.values(totalEntries);
+  let entryValues = Object.values(entrantTotal);
   entryValues.forEach(entry => {
     const raffleOdds = ((entry / flatArray.length) * 100).toFixed(2);
     if (raffleOdds > 50) {
@@ -91,23 +90,37 @@ const handleOdds = () => {
     }
   });
   return {
-    totalEntries,
+    entrantTotal,
     flatArray
   };
 };
 
-const writeToPage = (totalEntries, flatArray) => {
-  $("#odds").empty();
-  const entryCount = JSON.stringify(totalEntries);
-  const slicedEntryCount = entryCount.slice(1, -1);
-  const replacedEntryCount = slicedEntryCount.replace(/\"/g, " ");
-  const formattedEntryCount = replacedEntryCount.replace(/ :/g, ": ");
-  const splitEntryCount = formattedEntryCount.split(",");
-  console.log(splitEntryCount);
-  splitEntryCount.forEach(count => {
-    $("#odds")
-      .append(`<div class="names m-1 ${className("white")}">${count}</div><hr>`)
-      .addClass(`border-left border-right border-light`);
+const handleCount = (entrantTotal, flatArray) => {
+  $("#count").empty();
+  const entryCount = JSON.stringify(entrantTotal);
+  // returns a stringified object from the handleOdds function.
+  // the keys are the names and the values are the count. ex. {"josh":5}
+  const formattedEntryCount = entryCount
+    .slice(1, -1)
+    .replace(/\"/g, " ")
+    .replace(/ :/g, ": ")
+    .split(",");
+  // returns an array of the entryCounts as strings formatted like this: [" josh: 5", " kenny: 6"]
+  formattedEntryCount.forEach(count => {
+    count = count.trim();
+    // removes whitespace from beginning of each formattedEntryCount
+    let id = count.substring(0, count.indexOf(":"));
+    // returns the name as a string like "josh" by trimming the colon and anything after it.
+    // used to match id of count to delete button and filter the array accordingly.
+    if (flatArray.length > 0) {
+      $("#count")
+        .append(
+          `<span id="${id}" class="delete-entry m-1 ml-3 float-left btn btn-sm btn-outline-light" value="${id}">X</span><div class="names m-1 ${className(
+            "white"
+          )}">${count}</div><hr>`
+        )
+        .addClass(`border-left border-right border-light`);
+    }
   });
 
   $("#total-entries").html(
@@ -128,8 +141,11 @@ const doSubmit = () => {
     $("#chance").empty();
     randomizeProgress();
     handleEntry(name, entries);
-    const { totalEntries, flatArray } = handleOdds();
-    writeToPage(totalEntries, flatArray);
+    const {
+      entrantTotal,
+      flatArray
+    } = handleOdds();
+    handleCount(entrantTotal, flatArray);
   } else {
     handleErrors();
   }
@@ -148,17 +164,17 @@ const handleErrors = () => {
 const className = color => {
   let classes = "badge badge-";
   classes +=
-    color == "green"
-      ? "success"
-      : color == "red"
-      ? "danger"
-      : color == "white"
-      ? "light"
-      : color == "yellow"
-      ? "warning"
-      : color == "blue"
-      ? "primary"
-      : "dark";
+    color == "green" ?
+    "success" :
+    color == "red" ?
+    "danger" :
+    color == "white" ?
+    "light" :
+    color == "yellow" ?
+    "warning" :
+    color == "blue" ?
+    "primary" :
+    "dark";
   return classes;
 };
 
@@ -240,6 +256,19 @@ function typeWriter() {
   }
 }
 
+const resetEntries = () => {
+  raffleArray = [];
+  flatArray = [];
+  $("#total-entries, #count, #chance, #winner").empty();
+  $("#shuffle").empty();
+  $("#winner").empty()
+  $(".progress-bar")
+    .css("width", "0%")
+    .attr("aria-valuenow", 0)
+    .text("");
+  $("#pick-winner").prop("disabled", true);
+};
+
 $("#clear").on("click", event => {
   event.preventDefault();
   window.location.reload();
@@ -251,4 +280,109 @@ $("#clear").on("click", event => {
   //   .css("width", "0%")
   //   .attr("aria-valuenow", 0)
   //   .text("");
+});
+
+$("#reset").on("click", event => {
+  event.preventDefault();
+  $(".reset-modal").modal();
+  resetEntries();
+  localStorage.clear();
+});
+
+
+$(".delete").on("click", event => {
+  event.preventDefault();
+  const savedRaffle = localStorage.getItem("raffle");
+  if (savedRaffle) {
+    $(".save-msg").html(`<p><b>Saved data has been deleted.</b></p>`);
+    localStorage.clear();
+  } else {
+    $(".save-msg").html(
+      `<p><b>It's fun to click buttons, but there is nothing to delete.</b></p>`
+    );
+  }
+});
+
+
+$(".save-btn").on("click", event => {
+  event.preventDefault();
+  $(".save-modal").modal();
+  $(".save-msg").empty();
+});
+
+$(".load-btn").on("click", event => {
+  event.preventDefault();
+  $("#no-save").empty();
+  $(".refresh").remove();
+  $(".load-modal").modal();
+});
+
+$(".save").on("click", event => {
+  // $(".save-modal").modal("hide")
+  event.preventDefault();
+  const flatArray = raffleArray.reduce((a, b) => a.concat(b), []);
+  if (flatArray.length > 0) {
+    localStorage.setItem("raffle", JSON.stringify(flatArray));
+    $(".save-msg").html(`<p><b>Success! Raffle has been saved.</b></p>`);
+  } else {
+    $(".save-msg").html(`<p><b>No entries found. Add entries first.</b></p>`);
+  }
+});
+
+
+$(".load-data").on("click", event => {
+  event.preventDefault();
+  const savedRaffle = localStorage.getItem("raffle");
+  if (raffleArray.length === 0 && savedRaffle) {
+    let namesList = JSON.parse(savedRaffle);
+    raffleArray.push(namesList);
+    const {
+      entrantTotal,
+      flatArray
+    } = handleOdds();
+    handleCount(entrantTotal, flatArray);
+    $(".load-msg").html(
+      `<p id="no-save"><b>Saved raffle has been loaded.</b></p>`
+    );
+  } else if (!savedRaffle) {
+    $(".load-msg").html(`<p id="no-save"><b>No save data found.</b></p>`);
+  } else if (raffleArray.length !== 0 && savedRaffle) {
+    $(".load-msg").html(
+      `<p id="no-save"><b>Saved data found. Refresh the page before loading the saved raffle.</b></p>`
+    );
+    $(".refresh").remove();
+    $(".load-footer").append(
+      `<button class="btn btn-primary refresh">Refresh Page</button>`
+    );
+  }
+});
+
+$(document).on("click", ".delete-entry", event => {
+  $("#count, #chance, #winner", "#shuffle").empty();
+  $("#chance").empty()
+  $("#winner").empty()
+  $("#shuffle").empty()
+  const {
+    id,
+    value
+  } = event.target;
+  const array = raffleArray.reduce((a, b) => a.concat(b), []);
+  const filteredArray = array.filter(name => name !== id);
+  raffleArray = filteredArray;
+  const {
+    entrantTotal,
+    flatArray
+  } = handleOdds();
+  handleCount(entrantTotal, flatArray);
+  let spanId = `#${id}`;
+  $(spanId).hide();
+  $(".progress-bar")
+    .css("width", "0%")
+    .attr("aria-valuenow", 0)
+    .text("");
+});
+
+$(document).on("click", ".refresh", event => {
+  event.preventDefault();
+  window.location.reload();
 });

@@ -48,12 +48,24 @@ hr {
   font-size: 14px;
 }
 
+.load-btn,
+.save-btn,
+.reset-btn {
+  color: white;
+}
+
+.delete-entry {
+  cursor: pointer;
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+}
+
 img {
   width: 100%;
 }
 
 p {
-  font-weight: bold;
   font-size: 18px;
 }
 
@@ -78,6 +90,10 @@ p {
   .alert {
     font-size: 12px;
     cursor: pointer;
+  }
+
+  .delete-entry {
+    font-size: 10px;
   }
 
   #odds,
